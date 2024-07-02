@@ -1,17 +1,20 @@
-const express = require('express');
+import express, { json } from 'express';
+import morgan from 'morgan';
+
+import scoreRouter from './routes/scoreRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 const app = express();
 
-const port = 3001;
+// adds request logging in dev console
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
-app.get('/', (req, res) => {
-    res.status(200).json({name: 'jake', message: 'sending some JSON'});
-});
+// adds body to request object
+app.use(json());
 
-app.post('/', (req, res) => {
-    res.status(200).send('now it\'s postable');
-});
+app.use('/api/v1/scores', scoreRouter);
+app.use('/api/v1/users', userRouter);
 
-app.listen(port, () => {
-    console.log(`App running on port ${port}...`);
-});
+export default app;
