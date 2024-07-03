@@ -3,22 +3,21 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: [true, 'Must include first name.']
+        required: [true, "Must include first name."],
     },
     lastName: {
         type: String,
-        required: [true, 'Must include last name.']
+        required: [true, "Must include last name."],
     },
     age: {
-        type: Number
+        type: Number,
     },
     email: {
         type: String,
-        required: [true, 'Must include email address.']
+        required: [true, "Must include email address."],
     },
-
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;
