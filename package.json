@@ -6,6 +6,7 @@
     "scripts": {
         "start": "nodemon server.js",
         "format": "prettier . --write",
+        "lint": "eslint",
         "prepare": "husky"
     },
     "author": "",
