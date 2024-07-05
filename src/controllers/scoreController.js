@@ -51,7 +51,7 @@ const updateScore = async (req, res) => {
             },
         });
     } catch (e) {
-        res.status(400).json({
+        res.status(404).json({
             status: "error",
             message: e,
         });
