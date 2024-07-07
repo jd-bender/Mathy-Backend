@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import "dotenv/config";
-import app from "./src/app";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const app = require("./src/app.cjs");
 
 process.on("uncaughtException", (err) => {
     console.log(err.name, err.message);
@@ -8,6 +8,8 @@ process.on("uncaughtException", (err) => {
 
     process.exit(1);
 });
+
+dotenv.config({ path: "./.env" });
 
 const DB = process.env.TEST_DATABASE.replace(
     "<password>",

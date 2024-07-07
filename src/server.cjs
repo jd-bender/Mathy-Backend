@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const app = require("./app");
+const app = require("./app.cjs");
 
 process.on("uncaughtException", (err) => {
     console.log(err.name, err.message);
