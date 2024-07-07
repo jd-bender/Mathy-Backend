@@ -25,6 +25,8 @@ const server = app.listen(port, () => {
     console.log(`App running on port ${port}...`);
 });
 
+const endpointRoot = `http://localhost:${port}/api/v1`;
+
 describe("Mathy Endpoints", () => {
     beforeAll(async () => {
         await mongoose.connect(DB);
@@ -45,15 +47,21 @@ describe("Mathy Endpoints", () => {
     });
 
     describe("User Routes", () => {
+        afterEach(() => {
+            return axios.delete(`${endpointRoot}/users`);
+        });
+
+        const testUser = {
+            firstName: "Bill",
+            lastName: "Billyson",
+            age: 80,
+            email: "bill@billyyy.com",
+            password: "password",
+        };
+
         test("Add User", () => {
             return axios
-                .post(`http://localhost:${port}/api/v1/users/signup`, {
-                    firstName: "Bill",
-                    lastName: "Billyson",
-                    age: 80,
-                    email: "bill@billyyy.com",
-                    password: "password",
-                })
+                .post(`${endpointRoot}/users/signup`, testUser)
                 .then((response) => {
                     expect(response.data.data.user).toHaveProperty("_id");
                 });
@@ -61,15 +69,41 @@ describe("Mathy Endpoints", () => {
 
         test("Block user creation for duplicate email address", () => {
             return axios
-                .post(`http://localhost:${port}/api/v1/users/signup`, {
-                    firstName: "Bill",
-                    lastName: "Billyson",
-                    age: 80,
-                    email: "bill@billyyy.com",
-                    password: "password",
-                })
-                .catch((e) => {
-                    expect(e.response.data.status).toEqual("fail");
+                .post(`${endpointRoot}/users/signup`, testUser)
+                .then(() => {
+                    return axios
+                        .post(`${endpointRoot}/users/signup`, testUser)
+                        .catch((e) => {
+                            expect(e.response.data.status).toBe("fail");
+                        });
+                });
+        });
+
+        test("Delete user", () => {
+            return axios
+                .post(`${endpointRoot}/users/signup`, testUser)
+                .then((creationResponse) => {
+                    expect(creationResponse.data.data.user).toHaveProperty(
+                        "_id",
+                    );
+
+                    return axios
+                        .delete(
+                            `${endpointRoot}/users/${creationResponse.data.data.user._id}`,
+                        )
+                        .then((deletionResponse) => {
+                            expect(deletionResponse.data.status).toBe(
+                                "success",
+                            );
+
+                            return axios
+                                .get(
+                                    `${endpointRoot}/users/${creationResponse.data.data.user._id}`,
+                                )
+                                .catch((e) => {
+                                    expect(e.response.data.status).toBe("fail");
+                                });
+                        });
                 });
         });
     });
