@@ -8,7 +8,7 @@ const {
 } = require("../controllers/scoreController.cjs");
 
 const router = Router();
-
+console.log("a change here");
 router.route("/:id").get(getScore).patch(updateScore).delete(deleteScore);
 
 router.route("/").get(getAllScores).post(addScore);
