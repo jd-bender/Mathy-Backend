@@ -9,20 +9,21 @@ const signToken = (id) => {
     });
 };
 
-exports.signUp = catchAsync(async (req, res) => {
+exports.signUp = catchAsync(async (req, res, next) => {
     if ("role" in req.body) delete req.body.role;
 
     const newUser = await User.create(req.body);
-
     const token = signToken(newUser._id);
 
-    res.status(200).json({
+    res.status(201).json({
         status: "success",
         token,
         data: {
             user: newUser,
         },
     });
+
+    next();
 });
 
 exports.login = catchAsync(async (req, res, next) => {
