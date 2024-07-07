@@ -59,11 +59,34 @@ describe("Mathy Endpoints", () => {
             password: "password",
         };
 
-        test("Add User", () => {
+        test("Add user", () => {
             return axios
                 .post(`${endpointRoot}/users/signup`, testUser)
-                .then((response) => {
-                    expect(response.data.data.user).toHaveProperty("_id");
+                .then((creationResponse) => {
+                    expect(creationResponse.data.data.user).toHaveProperty(
+                        "_id",
+                    );
+                });
+        });
+
+        test("Get user", () => {
+            return axios
+                .post(`${endpointRoot}/users/signup`, testUser)
+                .then((creationResponse) => {
+                    expect(creationResponse.data.data.user).toHaveProperty(
+                        "_id",
+                    );
+
+                    return axios
+                        .get(
+                            `${endpointRoot}/users/${creationResponse.data.data.user._id}`,
+                        )
+                        .then((getResponse) => {
+                            expect(getResponse.data.status).toBe("success");
+                            expect(getResponse.data.data.user).toHaveProperty(
+                                "_id",
+                            );
+                        });
                 });
         });
 
@@ -103,6 +126,31 @@ describe("Mathy Endpoints", () => {
                                 .catch((e) => {
                                     expect(e.response.data.status).toBe("fail");
                                 });
+                        });
+                });
+        });
+
+        test("Update user", () => {
+            return axios
+                .post(`${endpointRoot}/users/signup`, testUser)
+                .then((creationResponse) => {
+                    expect(creationResponse.data.data.user).toHaveProperty(
+                        "_id",
+                    );
+
+                    const newFirstName = "Notbilly";
+
+                    return axios
+                        .patch(
+                            `${endpointRoot}/users/${creationResponse.data.data.user._id}`,
+                            {
+                                firstName: newFirstName,
+                            },
+                        )
+                        .then((updateResponse) => {
+                            expect(
+                                updateResponse.data.data.user.firstName,
+                            ).toBe(newFirstName);
                         });
                 });
         });
