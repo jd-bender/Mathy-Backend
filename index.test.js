@@ -12,6 +12,8 @@ process.on("uncaughtException", (err) => {
 
 dotenv.config({ path: "./.env" });
 
+process.env.NODE_ENV = "production";
+
 const DB = process.env.TEST_DATABASE.replace(
     "<password>",
     process.env.DATABASE_PASSWORD,
@@ -54,10 +56,20 @@ describe("Mathy Endpoints", () => {
                 })
                 .then((response) => {
                     expect(response.data.data.user).toHaveProperty("_id");
+                });
+        });
+
+        test("Block user creation for duplicate email address", () => {
+            return axios
+                .post(`http://localhost:${port}/api/v1/users/signup`, {
+                    firstName: "Bill",
+                    lastName: "Billyson",
+                    age: 80,
+                    email: "bill@billyyy.com",
+                    password: "password",
                 })
                 .catch((e) => {
-                    console.log("Something went wrong.");
-                    console.log(e);
+                    expect(e.response.data.status).toEqual("fail");
                 });
         });
     });

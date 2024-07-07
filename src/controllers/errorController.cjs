@@ -7,7 +7,7 @@ const handleDBCastError = (err) => {
 
 const handleDBDuplicateFieldsError = (err) => {
     const message = `Duplicate field value(s): ${Object.keys(err.keyValue)}. Please use unique values.`;
-    return new AppError(message, 400);
+    return new AppError(message, 423);
 };
 
 const handleDBValidationError = (err) => {
@@ -39,6 +39,7 @@ const sendErrorProd = (err, res) => {
     }
 };
 
+// eslint-disable-next-line no-unused-vars
 const globalErrorHandler = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || "error";
@@ -58,8 +59,6 @@ const globalErrorHandler = (err, req, res, next) => {
 
         sendErrorProd(error, res);
     }
-
-    next();
 };
 
 module.exports = globalErrorHandler;

@@ -9,6 +9,7 @@ const signToken = (id) => {
     });
 };
 
+// eslint-disable-next-line no-unused-vars
 exports.signUp = catchAsync(async (req, res, next) => {
     if ("role" in req.body) delete req.body.role;
 
@@ -22,8 +23,6 @@ exports.signUp = catchAsync(async (req, res, next) => {
             user: newUser,
         },
     });
-
-    next();
 });
 
 exports.login = catchAsync(async (req, res, next) => {
