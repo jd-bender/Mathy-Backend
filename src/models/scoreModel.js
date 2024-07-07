@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const scoreSchema = new mongoose.Schema({
     value: {
@@ -9,4 +9,4 @@ const scoreSchema = new mongoose.Schema({
 
 const Score = mongoose.model("Score", scoreSchema);
 
-export default Score;
+module.exports = Score;

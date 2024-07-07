@@ -31,4 +31,4 @@ const globalErrorHandler = (err, req, res) => {
     }
 };
 
-export default globalErrorHandler;
+module.exports = globalErrorHandler;

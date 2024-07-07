@@ -1,11 +1,11 @@
-import { Router } from "express";
-import {
+const { Router } = require("express");
+const {
     getScore,
     getAllScores,
     updateScore,
     addScore,
     deleteScore,
-} from "../controllers/scoreController.js";
+} = require("../controllers/scoreController");
 
 const router = Router();
 
@@ -13,4 +13,4 @@ router.route("/:id").get(getScore).patch(updateScore).delete(deleteScore);
 
 router.route("/").get(getAllScores).post(addScore);
 
-export default router;
+module.exports = router;

@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken";
-import User from "../models/userModel.js";
-import catchAsync from "../utils/catchAsync.js";
-import AppError from "../utils/appError.js";
+const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 
 const signToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -9,7 +9,7 @@ const signToken = (id) => {
     });
 };
 
-const signUp = catchAsync(async (req, res) => {
+exports.signUp = catchAsync(async (req, res) => {
     if ("role" in req.body) delete req.body.role;
 
     const newUser = await User.create(req.body);
@@ -25,7 +25,7 @@ const signUp = catchAsync(async (req, res) => {
     });
 });
 
-const login = catchAsync(async (req, res, next) => {
+exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -47,5 +47,3 @@ const login = catchAsync(async (req, res, next) => {
         token,
     });
 });
-
-export { signUp, login };

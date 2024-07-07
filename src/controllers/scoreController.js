@@ -1,8 +1,8 @@
-import Score from "../models/scoreModel.js";
-import catchAsync from "../utils/catchAsync.js";
-import AppError from "../utils/appError.js";
+const Score = require("../models/scoreModel");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 
-const getScore = catchAsync(async (req, res, next) => {
+exports.getScore = catchAsync(async (req, res, next) => {
     const score = await Score.findById(req.params.id);
 
     if (!score) {
@@ -17,7 +17,7 @@ const getScore = catchAsync(async (req, res, next) => {
     });
 });
 
-const getAllScores = catchAsync(async (req, res) => {
+exports.getAllScores = catchAsync(async (req, res) => {
     const scores = await Score.find();
 
     res.status(200).json({
@@ -29,7 +29,7 @@ const getAllScores = catchAsync(async (req, res) => {
     });
 });
 
-const updateScore = catchAsync(async (req, res, next) => {
+exports.updateScore = catchAsync(async (req, res, next) => {
     const score = await Score.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
@@ -47,7 +47,7 @@ const updateScore = catchAsync(async (req, res, next) => {
     });
 });
 
-const addScore = catchAsync(async (req, res) => {
+exports.addScore = catchAsync(async (req, res) => {
     const newScore = await Score.create(req.body);
 
     res.status(200).json({
@@ -58,7 +58,7 @@ const addScore = catchAsync(async (req, res) => {
     });
 });
 
-const deleteScore = catchAsync(async (req, res, next) => {
+exports.deleteScore = catchAsync(async (req, res, next) => {
     const score = await Score.findByIdAndDelete(req.params.id);
 
     if (!score) {
@@ -70,5 +70,3 @@ const deleteScore = catchAsync(async (req, res, next) => {
         data: null,
     });
 });
-
-export { getScore, getAllScores, updateScore, addScore, deleteScore };

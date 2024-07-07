@@ -1,10 +1,10 @@
-import express, { json } from "express";
-import morgan from "morgan";
+const express = require("express");
+const morgan = require("morgan");
 
-import AppError from "./utils/appError.js";
-import globalErrorHandler from "./controllers/errorController.js";
-import scoreRouter from "./routes/scoreRoutes.js";
-import userRouter from "./routes/userRoutes.js";
+const AppError = require("./utils/appError");
+const globalErrorHandler = require("./controllers/errorController");
+const scoreRouter = require("./routes/scoreRoutes");
+const userRouter = require("./routes/userRoutes");
 
 const app = express();
 
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // adds body to request object
-app.use(json());
+app.use(express.json());
 
 app.use("/api/v1/scores", scoreRouter);
 app.use("/api/v1/users", userRouter);
@@ -25,4 +25,4 @@ app.all("*", (req, res, next) => {
 
 app.use(globalErrorHandler);
 
-export default app;
+module.exports = app;

@@ -1,7 +1,7 @@
-import User from "../models/userModel.js";
-import catchAsync from "../utils/catchAsync.js";
+const User = require("../models/userModel");
+const catchAsync = require("../utils/catchAsync");
 
-const getUser = catchAsync(async (req, res) => {
+exports.getUser = catchAsync(async (req, res) => {
     const user = await User.findById(req.params.id);
 
     res.status(200).json({
@@ -12,7 +12,7 @@ const getUser = catchAsync(async (req, res) => {
     });
 });
 
-const getAllUsers = catchAsync(async (req, res) => {
+exports.getAllUsers = catchAsync(async (req, res) => {
     const users = await User.find();
 
     res.status(200).json({
@@ -24,7 +24,7 @@ const getAllUsers = catchAsync(async (req, res) => {
     });
 });
 
-const updateUser = catchAsync(async (req, res) => {
+exports.updateUser = catchAsync(async (req, res) => {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
@@ -38,7 +38,7 @@ const updateUser = catchAsync(async (req, res) => {
     });
 });
 
-const deleteUser = catchAsync(async (req, res) => {
+exports.deleteUser = catchAsync(async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
@@ -47,7 +47,7 @@ const deleteUser = catchAsync(async (req, res) => {
     });
 });
 
-const deleteAllUsers = catchAsync(async (req, res) => {
+exports.deleteAllUsers = catchAsync(async (req, res) => {
     await User.deleteMany({});
 
     res.status(204).json({
@@ -55,5 +55,3 @@ const deleteAllUsers = catchAsync(async (req, res) => {
         data: null,
     });
 });
-
-export { getUser, getAllUsers, updateUser, deleteUser, deleteAllUsers };
