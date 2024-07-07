@@ -70,3 +70,12 @@ exports.deleteScore = catchAsync(async (req, res, next) => {
         data: null,
     });
 });
+
+exports.deleteAllScores = catchAsync(async (req, res) => {
+    await Score.deleteMany({});
+
+    res.status(204).json({
+        status: "success",
+        data: null,
+    });
+});

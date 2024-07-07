@@ -5,11 +5,12 @@ const {
     updateScore,
     addScore,
     deleteScore,
+    deleteAllScores,
 } = require("../controllers/scoreController.cjs");
 
 const router = Router();
 
 router.route("/:id").get(getScore).patch(updateScore).delete(deleteScore);
-router.route("/").get(getAllScores).post(addScore);
+router.route("/").get(getAllScores).post(addScore).delete(deleteAllScores);
 
 module.exports = router;
