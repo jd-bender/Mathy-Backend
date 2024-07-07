@@ -1,5 +1,5 @@
-const User = require("../models/userModel");
-const catchAsync = require("../utils/catchAsync");
+const User = require("../models/userModel.cjs");
+const catchAsync = require("../utils/catchAsync.cjs");
 
 exports.getUser = catchAsync(async (req, res) => {
     const user = await User.findById(req.params.id);

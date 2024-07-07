@@ -2,8 +2,8 @@ const express = require("express");
 const morgan = require("morgan");
 
 const AppError = require("./utils/appError.cjs");
-const globalErrorHandler = require("./controllers/errorController");
-const scoreRouter = require("./routes/scoreRoutes");
+const globalErrorHandler = require("./controllers/errorController.cjs");
+const scoreRouter = require("./routes/scoreRoutes.cjs");
 const userRouter = require("./routes/userRoutes.cjs");
 
 const app = express();

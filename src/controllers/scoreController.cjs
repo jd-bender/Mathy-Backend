@@ -1,6 +1,6 @@
-const Score = require("../models/scoreModel");
-const catchAsync = require("../utils/catchAsync");
-const AppError = require("../utils/appError");
+const Score = require("../models/scoreModel.cjs");
+const catchAsync = require("../utils/catchAsync.cjs");
+const AppError = require("../utils/appError.cjs");
 
 exports.getScore = catchAsync(async (req, res, next) => {
     const score = await Score.findById(req.params.id);

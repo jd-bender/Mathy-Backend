@@ -5,7 +5,7 @@ const {
     updateScore,
     addScore,
     deleteScore,
-} = require("../controllers/scoreController");
+} = require("../controllers/scoreController.cjs");
 
 const router = Router();
 

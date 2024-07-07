@@ -5,8 +5,8 @@ const {
     updateUser,
     deleteUser,
     deleteAllUsers,
-} = require("../controllers/userController");
-const { signUp, login } = require("../controllers/authController");
+} = require("../controllers/userController.cjs");
+const { signUp, login } = require("../controllers/authController.cjs");
 
 const router = Router();
 
