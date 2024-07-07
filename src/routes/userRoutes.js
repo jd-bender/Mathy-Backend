@@ -3,11 +3,10 @@ import {
     getUser,
     getAllUsers,
     updateUser,
-    signUp,
-    login,
     deleteUser,
     deleteAllUsers,
 } from "../controllers/userController.js";
+import { signUp, login } from "../controllers/authController.js";
 
 const router = Router();
 
