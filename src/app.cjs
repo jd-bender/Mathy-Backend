@@ -16,6 +16,11 @@ if (process.env.NODE_ENV === "development") {
 // adds body to request object
 app.use(express.json());
 
+app.use((req, res, next) => {
+    req.requestTime = new Date().toISOString();
+    next();
+});
+
 app.use("/api/v1/scores", scoreRouter);
 app.use("/api/v1/users", userRouter);
 

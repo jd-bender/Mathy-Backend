@@ -6,15 +6,15 @@ const {
     deleteUser,
     deleteAllUsers,
 } = require("../controllers/userController.cjs");
-const { signUp, login } = require("../controllers/authController.cjs");
+const { signUp, login, protect } = require("../controllers/authController.cjs");
 
 const router = Router();
 
 router.post("/signup", signUp);
 router.post("/login", login);
 
-router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
+router.route("/:id").get(getUser).patch(protect, updateUser).delete(deleteUser);
 
-router.route("/").get(getAllUsers).delete(deleteAllUsers);
+router.route("/").get(protect, getAllUsers).delete(protect, deleteAllUsers);
 
 module.exports = router;

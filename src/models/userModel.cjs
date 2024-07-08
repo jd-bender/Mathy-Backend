@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
     {
         firstName: {
             type: String,
@@ -31,10 +31,17 @@ const userSchema = new mongoose.Schema(
             minLength: 8,
             select: false,
         },
+        passwordChangedAt: Date,
+        role: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user",
+        },
     },
     {
         toJSON: { virtuals: true },
         toObject: { virtuals: true },
+        id: false,
     },
 );
 
@@ -59,6 +66,20 @@ userSchema.methods.correctPassword = async function (
     return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-const User = mongoose.model("User", userSchema);
+userSchema.methods.changedPasswordAfterTokenIssed = function (JWTTimestamp) {
+    if (this.passwordChangedAt) {
+        const changedTimestamp = parseInt(
+            this.passwordChangedAt.getTime() / 1000,
+        );
+
+        console.log(changedTimestamp, JWTTimestamp);
+
+        return JWTTimestamp < changedTimestamp;
+    }
+
+    return false;
+};
+
+const User = model("User", userSchema);
 
 module.exports = User;
