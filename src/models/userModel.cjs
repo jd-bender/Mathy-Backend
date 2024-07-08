@@ -66,7 +66,7 @@ userSchema.methods.correctPassword = async function (
     return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.methods.changedPasswordAfterTokenIssed = function (JWTTimestamp) {
+userSchema.methods.changedPasswordAfterTokenIssued = function (JWTTimestamp) {
     if (this.passwordChangedAt) {
         const changedTimestamp = parseInt(
             this.passwordChangedAt.getTime() / 1000,

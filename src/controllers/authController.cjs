@@ -78,9 +78,14 @@ exports.protect = catchAsync(async (req, res, next) => {
         );
     }
 
-    // if (user.changedPasswordAfterTokenIssued(decoded.iat)) {
-    //     return next(new AppError('Password was recently changed, please log in again.', 401));
-    // }
+    if (user.changedPasswordAfterTokenIssued(decoded.iat)) {
+        return next(
+            new AppError(
+                "Password was recently changed, please log in again.",
+                401,
+            ),
+        );
+    }
 
     req.user = user;
 
