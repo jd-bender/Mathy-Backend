@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "allowJs": false,
+      "skipLibCheck": true,
+      "strict": true,
+      "noEmit": true,
+      "incremental": true,
+      "module": "NodeNext",
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "baseUrl": "src/",
+    },
+    "include": [
+      "**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  
