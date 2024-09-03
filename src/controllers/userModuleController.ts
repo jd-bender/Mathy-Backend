@@ -38,6 +38,24 @@ export const getAllUserModules = async (req: Request, res: Response) => {
     }
 };
 
+export const getUserModule = async (req: Request, res: Response) => {
+    try {
+        const userModule = await UserModule.findById(req.params.id);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                userModule,
+            },
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
+
 export const updateUserModule = async (req: Request, res: Response) => {
     try {
         const userModule = await UserModule.findByIdAndUpdate(
