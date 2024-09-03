@@ -1,10 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import catchAsync from "utilities/catchAsync.ts";
 import AppError from "utilities/appError.ts";
 import Module from "../models/moduleModel.ts";
 
-export const createModule = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const createModule = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const newModule = await Module.create(req.body);
 
         res.status(201).json({
@@ -13,11 +16,20 @@ export const createModule = catchAsync(
                 module: newModule,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const getAllModules = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const getAllModules = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const modules = await Module.find();
 
         res.status(200).json({
@@ -27,11 +39,20 @@ export const getAllModules = catchAsync(
                 modules,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const getModule = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const getModule = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const module = await Module.findById(req.params.id);
 
         if (!module) {
@@ -44,11 +65,20 @@ export const getModule = catchAsync(
                 module,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const updateModule = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const updateModule = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const module = await Module.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
@@ -64,11 +94,20 @@ export const updateModule = catchAsync(
                 module,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const deleteModule = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const deleteModule = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const module = await Module.findByIdAndDelete(req.params.id);
 
         if (!module) {
@@ -79,5 +118,10 @@ export const deleteModule = catchAsync(
             status: "success",
             data: null,
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};

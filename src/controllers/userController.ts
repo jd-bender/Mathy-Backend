@@ -1,10 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import catchAsync from "utilities/catchAsync.ts";
 import AppError from "utilities/appError.ts";
 import User from "../models/userModel.ts";
 
-export const createUser = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const createUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const newUser = await User.create(req.body);
 
         res.status(201).json({
@@ -13,11 +16,20 @@ export const createUser = catchAsync(
                 user: newUser,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const getAllUsers = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const getAllUsers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const users = await User.find();
 
         res.status(200).json({
@@ -27,11 +39,20 @@ export const getAllUsers = catchAsync(
                 users,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const getUser = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const getUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const user = await User.findById(req.params.id);
 
         if (!user) {
@@ -44,11 +65,20 @@ export const getUser = catchAsync(
                 user,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const updateUser = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const updateUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
@@ -64,11 +94,20 @@ export const updateUser = catchAsync(
                 user,
             },
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
 
-export const deleteUser = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
+export const deleteUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
         const user = await User.findByIdAndDelete(req.params.id);
 
         if (!user) {
@@ -79,5 +118,10 @@ export const deleteUser = catchAsync(
             status: "success",
             data: null,
         });
-    },
-);
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
+};

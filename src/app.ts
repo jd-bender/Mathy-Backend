@@ -3,9 +3,10 @@ import morgan from "morgan";
 
 import AppError from "utilities/appError.ts";
 import globalErrorHandler from "./controllers/errorController.ts";
-import userRouter from "./routes/userRoutes.ts";
-import moduleRouter from "./routes/moduleRoutes.ts";
-import userModuleRouter from "./routes/userModuleRoutes.ts";
+
+import userRouter from "./routers/userRouter.ts";
+import moduleRouter from "./routers/moduleRouter.ts";
+import userModuleRouter from "./routers/userModuleRouter.ts";
 
 const app = express();
 
