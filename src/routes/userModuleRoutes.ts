@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getAllUserModules } from "controllers/userModuleController.ts";
+import { createUserModule } from "controllers/userModuleController.ts";
 
 const router = Router();
 
-router.route("/").get(getAllUserModules);
+router.route("/").post(createUserModule);
 
 export default router;
