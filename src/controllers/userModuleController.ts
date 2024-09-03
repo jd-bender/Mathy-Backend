@@ -19,9 +19,21 @@ export const createUserModule = async (req: Request, res: Response) => {
     }
 };
 
-export const getAllUserModules = (req: Request, res: Response) => {
-    res.status(500).json({
-        status: "error",
-        message: "Route not yet created.",
-    });
+export const getAllUserModules = async (req: Request, res: Response) => {
+    try {
+        const userModules = await UserModule.find();
+
+        res.status(200).json({
+            status: "success",
+            results: userModules.length,
+            data: {
+                userModules,
+            },
+        });
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
 };

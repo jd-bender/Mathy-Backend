@@ -12,16 +12,28 @@ export const createModule = async (req: Request, res: Response) => {
             },
         });
     } catch (e) {
-        res.status(201).json({
+        res.status(400).json({
             status: "error",
             message: e,
         });
     }
 };
 
-export const getAllModules = (req: Request, res: Response) => {
-    res.status(500).json({
-        status: "error",
-        message: "Route not yet created.",
-    });
+export const getAllModules = async (req: Request, res: Response) => {
+    try {
+        const modules = await Module.find();
+
+        res.status(200).json({
+            status: "success",
+            results: modules.length,
+            data: {
+                modules,
+            },
+        });
+    } catch (e) {
+        res.status(400).json({
+            status: "error",
+            message: e,
+        });
+    }
 };
