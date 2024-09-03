@@ -37,3 +37,58 @@ export const getAllModules = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const getModule = async (req: Request, res: Response) => {
+    try {
+        const module = await Module.findById(req.params.id);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                module,
+            },
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
+
+export const updateModule = async (req: Request, res: Response) => {
+    try {
+        const module = await Module.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                module,
+            },
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
+
+export const deleteModule = async (req: Request, res: Response) => {
+    try {
+        await Module.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({
+            status: "success",
+            data: null,
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
+};

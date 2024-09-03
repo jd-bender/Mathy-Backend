@@ -19,23 +19,76 @@ export const createUser = async (req: Request, res: Response) => {
     }
 };
 
-export const getUser = (req: Request, res: Response) => {
-    res.status(500).json({
-        status: "error",
-        message: "Route not yet created.",
-    });
+export const getAllUsers = async (req: Request, res: Response) => {
+    try {
+        const users = await User.find();
+
+        res.status(200).json({
+            status: "success",
+            results: users.length,
+            data: {
+                users,
+            },
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
 };
 
-export const updateUser = (req: Request, res: Response) => {
-    res.status(500).json({
-        status: "error",
-        message: "Route not yet created.",
-    });
+export const getUser = async (req: Request, res: Response) => {
+    try {
+        const user = await User.findById(req.params.id);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                user,
+            },
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
 };
 
-export const deleteUser = (req: Request, res: Response) => {
-    res.status(500).json({
-        status: "error",
-        message: "Route not yet created.",
-    });
+export const updateUser = async (req: Request, res: Response) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                user,
+            },
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+    try {
+        await User.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({
+            status: "success",
+            data: null,
+        });
+    } catch (e) {
+        res.status(404).json({
+            status: "error",
+            message: e,
+        });
+    }
 };
