@@ -1,7 +1,25 @@
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 import app from "app.ts";
 
-dotenv.config({ path: "../.env" });
+dotenv.config();
+
+if (process.env.DATABASE && process.env.DATABASE_PASSWORD) {
+    const DB = process.env.DATABASE.replace(
+        "<PASSWORD>",
+        process.env.DATABASE_PASSWORD,
+    );
+
+    mongoose
+        .connect(DB)
+        .then(() => {
+            console.log("Connected to database successfully.");
+        })
+        .catch((e) => {
+            console.log("Did not connect to database.");
+            console.log(e);
+        });
+}
 
 const port = process.env.PORT || 3001;
 
