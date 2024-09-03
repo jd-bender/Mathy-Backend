@@ -31,7 +31,7 @@ export const getAllModules = async (req: Request, res: Response) => {
             },
         });
     } catch (e) {
-        res.status(400).json({
+        res.status(404).json({
             status: "error",
             message: e,
         });
