@@ -1,14 +1,26 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const userModuleSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, "Must include a name."],
+const userModuleSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Must include a user ID."],
     },
-    slug: {
-        type: String,
-        required: [true, "Must include a slug."],
+    module: {
+        type: Schema.Types.ObjectId,
+        ref: "Module",
+        required: [true, "Must include a module ID."],
+    },
+    completed: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    highestStreak: {
+        type: Number,
+        required: false,
+        default: 0,
     },
 });
 
-export default mongoose.model("User_Module", userModuleSchema);
+export default model("User_Module", userModuleSchema);
