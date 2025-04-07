@@ -16,11 +16,8 @@ export const createModule = async (
                 module: newModule,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -39,11 +36,8 @@ export const getAllModules = async (
                 modules,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -65,11 +59,8 @@ export const getModule = async (
                 module,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -94,11 +85,8 @@ export const updateModule = async (
                 module,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -118,10 +106,7 @@ export const deleteModule = async (
             status: "success",
             data: null,
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };

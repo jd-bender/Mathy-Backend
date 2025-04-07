@@ -16,11 +16,8 @@ export const createUser = async (
                 user: newUser,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -39,11 +36,8 @@ export const getAllUsers = async (
                 users,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -65,11 +59,8 @@ export const getUser = async (
                 user,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -94,11 +85,8 @@ export const updateUser = async (
                 user,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -118,10 +106,7 @@ export const deleteUser = async (
             status: "success",
             data: null,
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };

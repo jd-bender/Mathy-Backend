@@ -20,11 +20,8 @@ export const createUserModule = async (
                 userModule: newUserModule,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -43,11 +40,8 @@ export const getAllUserModules = async (
                 userModules,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -71,11 +65,8 @@ export const getUserModule = async (
                 userModule,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -106,11 +97,8 @@ export const updateUserModule = async (
                 userModule,
             },
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
 
@@ -132,10 +120,7 @@ export const deleteUserModule = async (
             status: "success",
             data: null,
         });
-    } catch (e) {
-        res.status(400).json({
-            status: "error",
-            message: e,
-        });
+    } catch (e: any) {
+        return next(new AppError(e.message, 400));
     }
 };
