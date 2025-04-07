@@ -12,9 +12,6 @@ const moduleSchema = new Schema(
         toJSON: {
             virtuals: true,
         },
-        toObject: {
-            virtuals: true,
-        },
     },
 );
 
