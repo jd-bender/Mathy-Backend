@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "utilities/appError.ts";
-import User from "../models/userModel.ts";
+import AppError from "../utilities/appError.js";
+import User from "../models/userModel.js";
 
 export const createUser = async (
     req: Request,
@@ -103,10 +103,10 @@ export const deleteUser = async (
         }
 
         res.status(200).json({
-            status: "success",
+            status: "successs",
             data: null,
         });
-    } catch (e: any) {
+    } catch (e) {
         return next(new AppError(e.message, 400));
     }
 };

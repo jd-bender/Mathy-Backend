@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "utilities/appError.ts";
-import UserModule from "../models/userModuleModel.ts";
+import AppError from "../utilities/appError.js";
+import UserModule from "../models/userModuleModel.js";
 
 export const createUserModule = async (
     req: Request,

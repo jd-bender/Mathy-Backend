@@ -1,5 +1,6 @@
 {
     "*.ts": [
+      "tsc --esModuleInterop --noEmit",
       "prettier --write",
       "eslint"
     ]
