@@ -103,7 +103,7 @@ export const deleteUser = async (
         }
 
         res.status(200).json({
-            status: "successs",
+            status: "success",
             data: null,
         });
     } catch (e) {
