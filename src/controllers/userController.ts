@@ -85,7 +85,7 @@ export const updateUser = async (
                 user,
             },
         });
-    } catch (e) {
+    } catch (e: any) {
         return next(new AppError(e.message, 400));
     }
 };
@@ -106,7 +106,7 @@ export const deleteUser = async (
             status: "success",
             data: null,
         });
-    } catch (e) {
+    } catch (e: any) {
         return next(new AppError(e.message, 400));
     }
 };
