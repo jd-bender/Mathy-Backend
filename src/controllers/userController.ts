@@ -107,6 +107,7 @@ export const deleteUser = async (
             data: null,
         });
     } catch (e) {
+        console.log("should be error here");
         return next(new AppError(e.message, 400));
     }
 };
