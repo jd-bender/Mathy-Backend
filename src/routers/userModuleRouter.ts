@@ -5,7 +5,7 @@ import {
     getUserModule,
     updateUserModule,
     deleteUserModule,
-} from "../controllers/userModuleController.js";
+} from "../controllers/userModuleController.ts";
 
 const router = Router();
 

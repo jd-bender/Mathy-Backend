@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../utilities/appError.js";
-import Module from "../models/moduleModel.js";
+import AppError from "../utilities/appError.ts";
+import Module from "../models/moduleModel.ts";
 
 export const createModule = async (
     req: Request,

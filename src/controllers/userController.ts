@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../utilities/appError.js";
-import User from "../models/userModel.js";
+import AppError from "../utilities/appError.ts";
+import User from "../models/userModel.ts";
 
 export const createUser = async (
     req: Request,

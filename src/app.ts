@@ -1,12 +1,12 @@
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 
-import AppError from "./utilities/appError.js";
-import globalErrorHandler from "./controllers/errorController.js";
+import AppError from "./utilities/appError.ts";
+import globalErrorHandler from "./controllers/errorController.ts";
 
-import userRouter from "./routers/userRouter.js";
-import moduleRouter from "./routers/moduleRouter.js";
-import userModuleRouter from "./routers/userModuleRouter.js";
+import userRouter from "./routers/userRouter.ts";
+import moduleRouter from "./routers/moduleRouter.ts";
+import userModuleRouter from "./routers/userModuleRouter.ts";
 
 const app = express();
 
