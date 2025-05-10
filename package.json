@@ -7,7 +7,7 @@
     "start": "tsx watch src/server.ts",
     "start:prod": "NODE_ENV=production tsx src/server.ts",
     "prepare": "husky",
-    "typecheck": "tsc --esModuleInterop --noEmit"
+    "typecheck": "tsc"
   },
   "author": "",
   "license": "ISC",

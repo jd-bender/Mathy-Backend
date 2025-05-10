@@ -106,8 +106,7 @@ export const deleteUser = async (
             status: "succcess",
             data: null,
         });
-    } catch (e) {
-        console.log("should be error here");
+    } catch (e: any) {
         return next(new AppError(e.message, 400));
     }
 };
