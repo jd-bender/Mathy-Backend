@@ -15,9 +15,8 @@ if (process.env.DATABASE && process.env.DATABASE_PASSWORD) {
         .then(() => {
             console.log("Connected to database successfully.");
         })
-        .catch((e) => {
-            console.log("Did not connect to database.");
-            console.log(e);
+        .catch((e: Error) => {
+            console.error(`Did not connect to database: ${e.message}`);
         });
 }
 
