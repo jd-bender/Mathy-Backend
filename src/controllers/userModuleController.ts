@@ -20,8 +20,12 @@ export const createUserModule = async (
                 userModule: newUserModule,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -40,8 +44,12 @@ export const getAllUserModules = async (
                 userModules,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -64,8 +72,12 @@ export const getUserModule = async (
                 userModule,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -92,8 +104,12 @@ export const updateUserModule = async (
                 userModule,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -111,7 +127,11 @@ export const deleteUserModule = async (
             status: "success",
             data: null,
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };

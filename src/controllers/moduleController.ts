@@ -16,8 +16,12 @@ export const createModule = async (
                 module: newModule,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -36,8 +40,12 @@ export const getAllModules = async (
                 modules,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -60,8 +68,12 @@ export const getModule = async (
                 module,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -84,8 +96,12 @@ export const updateModule = async (
                 module,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -103,7 +119,11 @@ export const deleteModule = async (
             status: "success",
             data: null,
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };

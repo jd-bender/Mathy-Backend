@@ -16,8 +16,12 @@ export const createUser = async (
                 user: newUser,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -36,8 +40,12 @@ export const getAllUsers = async (
                 users,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -60,8 +68,12 @@ export const getUser = async (
                 user,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -84,8 +96,12 @@ export const updateUser = async (
                 user,
             },
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
 
@@ -103,7 +119,11 @@ export const deleteUser = async (
             status: "succcess",
             data: null,
         });
-    } catch (e: any) {
-        return next(new AppError(e.message, 400));
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            return next(new AppError(e.message, 400));
+        } else {
+            return next(new AppError("Something went wrong.", 400));
+        }
     }
 };
