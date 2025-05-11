@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../utilities/appError.ts";
+import AppError from "../appError.ts";
 import User from "../models/userModel.ts";
 
 export const createUser = async (

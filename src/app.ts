@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 
-import AppError from "./utilities/appError.ts";
+import AppError from "./appError.ts";
 import globalErrorHandler from "./controllers/errorController.ts";
 
 import userRouter from "./routers/userRouter.ts";
