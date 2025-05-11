@@ -18,6 +18,8 @@ if (process.env.DATABASE && process.env.DATABASE_PASSWORD) {
         .catch((e: Error) => {
             console.error(`Did not connect to database: ${e.message}`);
         });
+} else {
+    console.error("Missing database credentials.");
 }
 
 const port = process.env.PORT || 3001;
