@@ -45,6 +45,9 @@ export const getAllUserModules = async (
     }
 };
 
+const noUserModuleFound = (next: NextFunction) =>
+    next(new AppError("No user module found with that ID.", 404));
+
 export const getUserModule = async (
     req: Request,
     res: Response,
@@ -53,11 +56,7 @@ export const getUserModule = async (
     try {
         const userModule = await UserModule.findById(req.params.id);
 
-        if (!userModule) {
-            return next(
-                new AppError("No user module found with that ID.", 404),
-            );
-        }
+        if (!userModule) return noUserModuleFound(next);
 
         res.status(200).json({
             status: "success",
@@ -85,11 +84,7 @@ export const updateUserModule = async (
             },
         );
 
-        if (!userModule) {
-            return next(
-                new AppError("No user module found with that ID.", 404),
-            );
-        }
+        if (!userModule) return noUserModuleFound(next);
 
         res.status(200).json({
             status: "success",
@@ -110,11 +105,7 @@ export const deleteUserModule = async (
     try {
         const userModule = await UserModule.findByIdAndDelete(req.params.id);
 
-        if (!userModule) {
-            return next(
-                new AppError("No user module found with that ID.", 404),
-            );
-        }
+        if (!userModule) return noUserModuleFound(next);
 
         res.status(200).json({
             status: "success",

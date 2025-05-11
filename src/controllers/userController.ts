@@ -41,6 +41,9 @@ export const getAllUsers = async (
     }
 };
 
+const noUserFound = (next: NextFunction) =>
+    next(new AppError("No user found with that ID.", 404));
+
 export const getUser = async (
     req: Request,
     res: Response,
@@ -49,9 +52,7 @@ export const getUser = async (
     try {
         const user = await User.findById(req.params.id);
 
-        if (!user) {
-            return next(new AppError("No user found with that ID.", 404));
-        }
+        if (!user) return noUserFound(next);
 
         res.status(200).json({
             status: "success",
@@ -75,9 +76,7 @@ export const updateUser = async (
             runValidators: true,
         });
 
-        if (!user) {
-            return next(new AppError("No user found with that ID.", 404));
-        }
+        if (!user) return noUserFound(next);
 
         res.status(200).json({
             status: "success",
@@ -98,9 +97,7 @@ export const deleteUser = async (
     try {
         const user = await User.findByIdAndDelete(req.params.id);
 
-        if (!user) {
-            return next(new AppError("No user found with that ID.", 404));
-        }
+        if (!user) return noUserFound(next);
 
         res.status(200).json({
             status: "succcess",

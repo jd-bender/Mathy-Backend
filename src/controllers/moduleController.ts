@@ -41,6 +41,9 @@ export const getAllModules = async (
     }
 };
 
+const noModuleFound = (next: NextFunction) =>
+    next(new AppError("No module found with that ID.", 404));
+
 export const getModule = async (
     req: Request,
     res: Response,
@@ -49,9 +52,7 @@ export const getModule = async (
     try {
         const module = await Module.findById(req.params.id);
 
-        if (!module) {
-            return next(new AppError("No module found with that ID.", 404));
-        }
+        if (!module) return noModuleFound(next);
 
         res.status(200).json({
             status: "success",
@@ -75,9 +76,7 @@ export const updateModule = async (
             runValidators: true,
         });
 
-        if (!module) {
-            return next(new AppError("No module found with that ID.", 404));
-        }
+        if (!module) return noModuleFound(next);
 
         res.status(200).json({
             status: "success",
@@ -98,9 +97,7 @@ export const deleteModule = async (
     try {
         const module = await Module.findByIdAndDelete(req.params.id);
 
-        if (!module) {
-            return next(new AppError("No module found with that ID.", 404));
-        }
+        if (!module) return noModuleFound(next);
 
         res.status(200).json({
             status: "success",
