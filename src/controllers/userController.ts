@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import AppError from "../appError.ts";
+import { handleError } from "utils.ts";
 import User from "../models/userModel.ts";
 
 export const createUser = async (
@@ -17,11 +18,7 @@ export const createUser = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -41,11 +38,7 @@ export const getAllUsers = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -69,11 +62,7 @@ export const getUser = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -97,11 +86,7 @@ export const updateUser = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -120,10 +105,6 @@ export const deleteUser = async (
             data: null,
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };

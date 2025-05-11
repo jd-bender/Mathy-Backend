@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import AppError from "../appError.ts";
+import { handleError } from "utils.ts";
 import Module from "../models/moduleModel.ts";
 
 export const createModule = async (
@@ -17,11 +18,7 @@ export const createModule = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -41,11 +38,7 @@ export const getAllModules = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -69,11 +62,7 @@ export const getModule = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -97,11 +86,7 @@ export const updateModule = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -120,10 +105,6 @@ export const deleteModule = async (
             data: null,
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };

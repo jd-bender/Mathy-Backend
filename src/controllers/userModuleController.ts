@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import AppError from "../appError.ts";
+import { handleError } from "utils.ts";
 import UserModule from "../models/userModuleModel.ts";
 
 export const createUserModule = async (
@@ -21,11 +22,7 @@ export const createUserModule = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -45,11 +42,7 @@ export const getAllUserModules = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -73,11 +66,7 @@ export const getUserModule = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -105,11 +94,7 @@ export const updateUserModule = async (
             },
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
 
@@ -128,10 +113,6 @@ export const deleteUserModule = async (
             data: null,
         });
     } catch (e: unknown) {
-        if (e instanceof Error) {
-            return next(new AppError(e.message, 400));
-        } else {
-            return next(new AppError("Something went wrong.", 400));
-        }
+        return handleError(next, e);
     }
 };
