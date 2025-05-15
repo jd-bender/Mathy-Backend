@@ -7,7 +7,8 @@
     "start": "tsx watch src/server.ts",
     "start:prod": "NODE_ENV=production tsx src/server.ts",
     "prepare": "husky",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "preinstall": "npx only-allow pnpm"
   },
   "author": "",
   "license": "ISC",
